@@ -8,7 +8,6 @@ export default class App extends Component {
     categorias: [],
     categoria_id: ''
   };
-
   buscarCategorias() {
     const url = "https://productos.ctpoba.edu.ar/api/categorias";
     axios.get(url)
