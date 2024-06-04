@@ -13,8 +13,8 @@ export default class App extends Component {
   }
 }
   buscarCategorias(categoria_id) {
-//  const url = "https://10.0.4.103:3000/api/categorias"
-    const url="http://productos.ctpoba/api/categorias"
+    const url = "https://10.0.4.103:3000/api/categorias"
+//  const url="http://productos.ctpoba/api/categorias"
     const config ={
     params:{ categoria_id }
     }
@@ -27,8 +27,8 @@ export default class App extends Component {
       });
   }
  buscarProductos() {
-    const url = "https://productos.ctpoba/api/productos"
-//  const url = "https://10.0.4.103:3000/api/productos"
+//  const url = "https://productos.ctpoba/api/productos"
+    const url = "https://10.0.4.103:3000/api/productos"
     axios.get(url)
       .then((resp) => {
         this.setState({ productos: resp.data.productos});
@@ -59,7 +59,7 @@ export default class App extends Component {
           )}
         </select>
         <h3>{this.state.categoria_id}</h3>
-        {this.statte.productos.map((prod, id) =>
+        {this.state.productos.map((prod, id) =>
         <span key={productos.id}>{ productos.nombre }</span>
       )}
       </div>
