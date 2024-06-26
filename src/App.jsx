@@ -28,6 +28,7 @@ export default class App extends Component {
           value="Buscar"
           onClick={() => this.buscarCategorias()} />
         <select
+        
           value={this.state.categoria_id}
           onChange={(event) => this.setState({ categoria_id: event.target.value })}>
 
