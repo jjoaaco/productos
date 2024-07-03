@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import api from './api';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import Personas from './components/Personas';
