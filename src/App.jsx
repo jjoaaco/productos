@@ -1,112 +1,175 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './App.css';
-import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm';
-import Personas from './components/Personas';
-import PersonForm from './components/PersonForm';
+import Header from './Componentes/Header'; 
+import Login from './Componentes/Login';
+import Registro from './Componentes/Registro';
+import Gestion from './Componentes/Gestion';
+import Tarjetas from './Componentes/Tarjetas';
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      token: null,
       logged: false,
-      loading: true,
-      persons: [],
-      editingPerson: null,
+      personas: [],
+      showLogin: true,
+      showRegister: false,
+      
     };
   }
 
-  async componentDidMount() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      this.setState({ logged: true });
-      await this.loadPersons();
-    }
-    this.setState({ loading: false });
+  registrodeusuario = (datos) => {
+    const url = "https://personas.ctpoba.edu.ar/api/registrar";
+    axios.post(url, datos)
+      .then((resp) => {
+        console.log(resp.data);
+        alert("Se registro correctamente")
+      })
+      .catch((error) => {
+        console.log(error);
+
+      });
   }
 
-  loadPersons = async () => {
-    try {
-      const response = await api.get('/personas');
-      this.setState({ persons: response.data });
-    } catch (error) {
-      console.error('Error al cargar personas', error);
-    }
-  };
-
-  addPerson = async (newPerson) => {
-    try {
-      const response = await api.post('/personas', newPerson);
-      this.setState((prevState) => ({
-        persons: [...prevState.persons, response.data],
-      }));
-    } catch (error) {
-      console.error('Error al agregar persona', error);
-    }
-  };
-
-  updatePerson = async (updatedPerson) => {
-    try {
-      await api.put(`/personas/${updatedPerson.id}`, updatedPerson);
-      this.setState((prevState) => ({
-        persons: prevState.persons.map(person =>
-          person.id === updatedPerson.id ? updatedPerson : person
-        ),
-      }));
-    } catch (error) {
-      console.error('Error al actualizar persona', error);
-    }
-  };
-
-  deletePerson = async (id) => {
-    try {
-      await api.delete(`/personas/${id}`);
-      this.setState((prevState) => ({
-        persons: prevState.persons.filter(person => person.id !== id),
-      }));
-    } catch (error) {
-      console.error('Error al eliminar persona', error);
-    }
-  };
-
-  setLogged = (logged) => {
-    this.setState({ logged });
-  };
-
-  setEditingPerson = (editingPerson) => {
-    this.setState({ editingPerson });
-  };
-
-  render() {
-    if (this.state.loading) {
-      return <p>Cargando...</p>;
-    }
-
-    if (!this.state.logged) {
-      return (
-        <div>
-          <RegisterForm />
-          <LoginForm setLogged={this.setLogged} />
-        </div>
-      );
-    }
-
-    return (
-      <div>
-        <h2>Gestión de Personas</h2>
-        <PersonForm
-          addPerson={this.addPerson}
-          updatePerson={this.updatePerson}
-          editingPerson={this.state.editingPerson}
-        />
-        <Personas
-          persons={this.state.persons}
-          setEditingPerson={this.setEditingPerson}
-          deletePerson={this.deletePerson}
-        />
-      </div>
-    );
+  iniciarsesion = (datos) => {
+    const url2 = "https://personas.ctpoba.edu.ar/api/ingresar";
+    axios.post(url2, datos)
+      .then((resp) => {
+        console.log(resp.data);
+        if (resp.data.status === "ok") {
+          this.setState({ token: resp.data.token, logged: true });
+          
+        } else {
+          alert("No se pudo conectar al servidor");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
-}
 
-export default App;
+  consultalistapriv = () => {
+    if (this.state.token !== null) {
+      const config = {
+        headers: {
+          authorization: this.state.token
+        }
+      };
+      const url3 = "https://personas.ctpoba.edu.ar/api/personas";
+      axios.get(url3, config)
+        .then((resp) => {
+          console.log(resp.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      alert("Inicie sesión");
+    }
+  }
+
+  enviarpersona = (datos) => {
+    if (this.state.token !== null) {
+      const config = {
+        headers: {
+          authorization: this.state.token
+        }
+      };
+      const url4 = "https://personas.ctpoba.edu.ar/api/personas";
+      axios.post(url4, datos, config)
+        .then((resp) => {
+          console.log(resp.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      console.log("error");
+    }
+  }
+
+  mostrarpersona = (datos) => {
+    if (this.state.token !== null) {
+      const config = {
+        headers: {
+          authorization: this.state.token
+        },
+        params: {
+          busqueda: datos?.documento
+        }
+      };
+
+      const url5 = "https://personas.ctpoba.edu.ar/api/personas";
+      axios.get(url5, config)
+        .then((resp) => {
+          const COINCIDENCIA = resp.data.personas.find(persona => persona.documento === datos.documento);
+          if (COINCIDENCIA) {
+            this.setState({ personas: [COINCIDENCIA] });
+          } else {
+            this.setState({ personas: resp.data.personas });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      alert("MAL");
+    }
+  }
+
+  borrarpersona = (persona_id) => {
+    if (this.state.token !== null) {
+      const config = {
+        headers: {
+          authorization: this.state.token
+        },
+        params: { persona_id }
+      };
+
+      const url = "https://personas.ctpoba.edu.ar/api/personas";
+      axios.delete(url, config)
+        .then((resp) => {
+          this.mostrarpersona({})
+          console.log("se elimino correctamente");
+          alert("Se elimino correctamente")
+        })
+        .catch((error) => {
+          console.log(error + "no se pudo eliminar");
+        });
+    }
+  }
+
+  actualizarpersona = (datos, persona_id) => {
+    if (this.state.token !== null) {
+      const config = {
+        headers: {
+          authorization: this.state.token
+        },
+        params: { persona_id }
+      };
+      console.log({ config });
+
+      const url = `https://personas.ctpoba.edu.ar/api/personas/`;
+      axios.put(url, datos, config)
+        .then((resp) => {
+          console.log(resp.data);
+          alert("seactualizo correctamente")
+          this.mostrarpersona({})
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      alert("Inicie sesión");
+    }
+  }
+
+  handleLoginClick = () => {
+    this.setState({ showLogin: true, showRegister: false });
+  };
+
+  handleRegisterClick = () => {
+    this.setState({ showLogin: false, showRegister: true });
+  };
