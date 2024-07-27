@@ -173,3 +173,36 @@ export default class App extends Component {
   handleRegisterClick = () => {
     this.setState({ showLogin: false, showRegister: true });
   };
+  render() {
+    return (
+      <div className='Contenedor'>
+        <Header 
+          onLoginClick={this.handleLoginClick} 
+          onRegisterClick={this.handleRegisterClick} 
+        />
+        {!this.state.logged ? (
+          <>
+            {this.state.showLogin && <Login iniciarsesion={(datos) => this.iniciarsesion(datos)} />}
+            {this.state.showRegister && <Registro registrodeusuario={(datos) => this.registrodeusuario(datos)} />}
+          </>
+        ) : (
+          <div>
+            <Gestion enviarpersona={(datos) => this.enviarpersona(datos)}
+              mostrarpersona={(datos) => this.mostrarpersona(datos)} />
+          </div>
+        )}
+
+        <div className='Tarjetasapp'>
+          {this.state.personas.map((per, index) =>
+            <Tarjetas
+              key={per._id}
+              persona={per}
+              borrarpersona={(persona_id) => this.borrarpersona(persona_id)}
+              actualizarpersona={(datos, persona_id) => this.actualizarpersona(datos, persona_id)} // Pasar la función actualizarpersona como prop
+            />
+          )}
+        </div>
+      </div>
+    );
+  }
+}
