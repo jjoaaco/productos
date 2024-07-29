@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
-import Header from './Componentes/Header'; 
-import Login from './Componentes/Login';
+import Header from './Componentes/Header.'; 
+import Login from './Componentes/Login.';
 import Registro from './Componentes/Registro';
-import Gestion from './Componentes/Gestion';
+import Gestion from './Componentes/Gestion.';
 import Tarjetas from './Componentes/Tarjetas';
 
 export default class App extends Component {
