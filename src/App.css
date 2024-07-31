@@ -93,3 +93,36 @@ form button:hover {
   gap: 25px;
 }
 
+.Tarjetas {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: calc(33.333% - 50px);
+  box-sizing: border-box;
+  transition: transform 0.2s;
+}
+
+.Tarjetas:hover {
+  transform: translateY(-5px);
+}
+
+.Tarjetas h3 {
+  margin-top: 0;
+  color: #424242;
+}
+
+.Tarjetas button {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+
+.Tarjetas button:hover {
+  background-color: #c62828;
+}
