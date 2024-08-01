@@ -198,7 +198,7 @@ export default class App extends Component {
               key={per._id}
               persona={per}
               borrarpersona={(persona_id) => this.borrarpersona(persona_id)}
-              actualizarpersona={(datos, persona_id) => this.actualizarpersona(datos, persona_id)} // Pasar la función actualizarpersona como prop
+              actualizarpersona={(datos, persona_id) => this.actualizarpersona(datos, persona_id)}
             />
           )}
         </div>
