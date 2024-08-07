@@ -1,9 +1,15 @@
 #root{
-  flex: 1;
+  width: 100rw;
+  min-width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.input button{
- background-color: brown;
+.Contenedor{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ flex: 1;
+ background-color: beige;
 }
-
