@@ -6,6 +6,8 @@ export default class Alumnos extends Component {
         super(props);
         this.state = {}
     }
+
+
     
   render() {
     return (

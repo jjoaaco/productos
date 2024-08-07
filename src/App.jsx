@@ -13,6 +13,8 @@ export default class App extends Component {
     }
   }
 
+
+
   render(){
     return(
       <>
@@ -25,13 +27,31 @@ export default class App extends Component {
           <Route path="/alumnos">
             <Alumnos />
           </Route>
-          <Route path="/alumnos/:id">
-            {(params) => <Alumnos id={params.id}/>}
+          <Route path="/alumnos/:curso/:id/:materia">
+            {(params) => 
+            <Alumnos 
+            mat={params.materia}
+            id={params.id}
+            curso={params.cursos}
+            />}
           </Route>
           <Route>ERROR 404</Route>
+          <Route path="/Registro">
+          </Route>
+          <Route path="/Curso">
+          </Route>
+
         </Switch>
         {/* footer */}
       </>
     )
   }
 }
+//sessionStorage 
+//GUARDAR sessionStorage.setItem('token, valor')
+//OBTENER sessionStorage.setItem('token')
+//ELIMINAR sessionStorage.setItem('token)
+//localstorage
+//GUARDAR sessionStorage.setItem('token, valor')
+//OBTENER sessionStorage.setItem('token')
+//ELIMINAR sessionStorage.setItem('token)
