@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #root{
   width: 100rw;
   min-width: 100%;
@@ -12,4 +13,133 @@
  align-items: center;
  flex: 1;
  background-color: beige;
+=======
+/* General */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #e8eaf6;
+  color: #424242;
+}
+
+.Contenedor {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+header {
+  background-color: #1e88e5;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+}
+
+header button {
+  background-color: #ff7043;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  margin: 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+header button:hover {
+  background-color: #ff5722;
+}
+
+/* Forms */
+form {
+  background-color: #fafafa;
+  border: 1px solid #b0bec5;
+  padding: 25px;
+  margin: 25px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+form input {
+  width: calc(100% - 24px);
+  padding: 12px;
+  margin: 12px 0;
+  border: 1px solid #90a4ae;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #1e88e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #1976d2;
+}
+
+/* Gestión */
+.Gestion {
+  margin: 25px 0;
+}
+
+.Gestion h2 {
+  color: #1e88e5;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+
+/* Tarjetas */
+.Tarjetasapp {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.Tarjetas {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: calc(33.333% - 50px);
+  box-sizing: border-box;
+  transition: transform 0.2s;
+}
+
+.Tarjetas:hover {
+  transform: translateY(-5px);
+}
+
+.Tarjetas h3 {
+  margin-top: 0;
+  color: #424242;
+}
+
+.Tarjetas button {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+
+.Tarjetas button:hover {
+  background-color: #c62828;
+>>>>>>> 99c6e2a34b611c395dc813f324772b57c30f2723
 }
